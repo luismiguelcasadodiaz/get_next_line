@@ -6,8 +6,8 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/13 10:58:39 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:25:24 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+char	*get_next_line(int fd);
