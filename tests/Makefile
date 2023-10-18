@@ -4,9 +4,9 @@
 NAME = test_get_next_line
 CC = cc
 ifeq ($(SIZE),)
-	CFLAGS = -Wall -Wextra  -Werror 
+	CFLAGS = -g -Wall -Wextra  -Werror 
 else
-	CFLAGS = -Wall -Wextra  -Werror -D BUFFER_SIZE=$(SIZE)
+	CFLAGS = -g -Wall -Wextra  -Werror -D BUFFER_SIZE=$(SIZE)
 endif
 PREVIOUS_SIZE=$(shell cat size.txt)
 
