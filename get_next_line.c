@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/13 11:26:27 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:00:20 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -47,5 +47,12 @@
 /*                                                                            */
 char	*get_next_line(int fd)
 {
+	static int	previous_fd;
+
+	if (previous_fd == fd)
+		write(1, &"same\n", 6);
+	else
+		write(1, &"different\n", 11); 
+	previous_fd = fd;
 	return (NULL);
 }

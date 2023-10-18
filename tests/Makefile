@@ -3,7 +3,12 @@
 
 NAME = test_get_next_line
 CC = cc
-CFLAGS = -Wall -Wextra  -Werror -D BUFFER_SIZE=42
+ifeq ($(SIZE),)
+	CFLAGS = -Wall -Wextra  -Werror 
+else
+	CFLAGS = -Wall -Wextra  -Werror -D BUFFER_SIZE=$(SIZE)
+endif
+PREVIOUS_SIZE=$(shell cat size.txt)
 
 # From 4.4.3 The Function wildcard gnu make manual....
 # Althought wildcard exparnds automaticaly in rules
@@ -31,8 +36,15 @@ BONUS_OBJS = $(patsubst %.c, %.o, $(BONUS_SRCS))
 # This is the reason for writtting this rule the first one
 
 
-all: $(NAME)
+all: $(NAME) 
 
+ifeq ($(SIZE),$(PREVIOUS_SIZE))
+	@echo "No size change"
+else
+	@echo "size change"
+	@echo $(SIZE) > size.txt
+	@make re
+endif
 
 # Vous devez utiliser la commande ar pour créer votre bibliothèque
 # NOTE rcs:
@@ -41,14 +53,14 @@ all: $(NAME)
 # - s can be seen to mean 'sort' (create a sorted index of) the library, so that it will be indexed and faster to access the functions in the library.
 #   Therefore, rcs can be seen to mean replace, create, sort
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) 
 	@echo "================ GATHERING ALL OBJECTS ====================="
 	$(CC) $(OBJS) -o $@
 
 
 # For each c file create its object file.
 
-%.o: %.c Makefile ../get_next_line.h
+%.o: %.c  Makefile ../get_next_line.h
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 # removes all generated object files
@@ -71,7 +83,6 @@ re: fclean all
 norma: $(SRCS)
 	@echo "================ CHECKING NORME ==========================="
 	norminette $(SRCS)
-
 
 
 # Pour rendre des bonus, vous devez inclure une règle bonus à votre Makefile qui 
