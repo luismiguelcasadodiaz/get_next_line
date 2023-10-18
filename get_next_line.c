@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/18 13:56:38 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:30:49 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -45,29 +45,38 @@
 /*                                                                            */
 /*   At while end, retunrns the pointer to new list                           */
 /*                                                                            */
+/*   static int	previous_fd;
+                                                                         */
+/*	if (previous_fd == fd)                                                    */
+/*		write(1, &"same\n", 6);                                               */
+/*	else                                                                      */
+/*		write(1, &"different\n", 11);                                         */
+/*	previous_fd = fd;                                                         */
+/*                                                                            */
+/*                                                                            */
+/*                                                                            */
+/*                                                                            */
+/*                                                                            */
 char	*get_next_line(int fd)
 {
-	static int	previous_fd;
 	size_t		read_bytes;
 	char		*read_buf;
+	short		found_nl;
 
-	if (previous_fd == fd)
-		write(1, &"same\n", 6);
-	else
-		write(1, &"different\n", 11); 
-	previous_fd = fd;
-	read_buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (read_buf == NULL)
-			return (NULL);
-	read_bytes = read(fd, read_buf, BUFFER_SIZE);
-	read_buf[read_bytes]= '\0';
-	if (read_bytes < BUFFER_SIZE)
+	found_nl = 0;
+
+	while (!found_nl)
 	{
-		write(1, read_buf, read_bytes);
+		read_buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (read_buf == NULL)
+			return (NULL);
+		read_bytes = read(fd, read_buf, BUFFER_SIZE);
+	read_buf[read_bytes]= '\0';
+	if (read_bytes == 0)
+	{
+		free(read_buf);
+		return (NULL);
 		write(1, &"File end\n", 10);
 	}
-	else
-		write(1, read_buf, read_bytes);
-
 	return (read_buf);
 }

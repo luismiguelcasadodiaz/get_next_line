@@ -60,7 +60,7 @@ $(NAME): $(OBJS)
 
 # For each c file create its object file.
 
-%.o: %.c  Makefile ../get_next_line.h
+%.o: %.c  size.txt Makefile ../get_next_line.h
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 # removes all generated object files

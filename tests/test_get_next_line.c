@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:16:41 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/18 14:01:59 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:21:42 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../get_next_line.h"
@@ -16,17 +16,26 @@
 
 void	show_file(char *filename)
 {
-	int	fd;
+	int		fd;
+	short	end_file;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
 		printf("Problems opening <%s> file \n", filename);
-		return; 
+		return ;
 	}
-	while (get_next_line(fd))
-			;
+	end_file = 0;
+	while (!end_file)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			end_file = 1;
+		else
+			printf("%s", line);
+		free(line);
+	}
 	close(fd);
 }
 
@@ -34,7 +43,5 @@ int	main(void)
 {
 	printf(">%d<\n", BUFFER_SIZE);
 	show_file("uno.txt");
-//	show_file("dos.txt");
-//	show_file("tres.txt");
 	return (0);
 }
