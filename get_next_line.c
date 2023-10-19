@@ -6,10 +6,25 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/18 17:30:49 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:58:23 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
+
+void	read_buffer_size(int fd, char **read_raw, size_t *read_bytes)
+{
+	*read_raw = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (read_raw == NULL)
+		return (NULL);
+	read_bytes = read(fd, *read_raw, BUFFER_SIZE);
+	if (read_bytes == 0)
+	{
+		free(*read_raw);
+		*read_raw = NULL;
+	}
+	else
+		*read_raw[read_bytes]= '\0';
+}
 
 /* get_next_line() returns a line from a file descriptor.                     */
 /*                                                                            */
@@ -22,31 +37,20 @@
 /*                                                                            */
 /* OPERATION                                                                  */
 /*                                                                            */
-/*  If any of the three argument is null, returns null doing nothing          */
+/* Automatic Variables                                                        */
+/*  read_raw to keep bytes as they come from file.                            */
+/*  read_buf to keep read bytes not yet delivered.                            */
 /*                                                                            */
-/*  Inits new list to null.                                                   */
 /*                                                                            */
-/*   Loops the list while there is a node to loop throu                       */
 /*                                                                            */
-/*   Apply f to actual node's content, keeping the result in a buffer `buf.   */
 /*                                                                            */
-/*   Create a new node having by content 'buf'.                               */
 /*                                                                            */
-/*   When it does not succed, liberates 'buf' and clean from the new list     */
-/*   previously added nodes. When ft_lstclear end, returns null, so ft_lstmap */
-/*   at this point returns null.                                              */
 /*                                                                            */
-/*   When it suceed, add the new node to new_list last node.                  */
+/*  If i have not bytes to deliver (read_buf == NULL) then i read more        */
 /*                                                                            */
-/*   I prefer track last node to avoid looping thru the full list each time   */
-/*   i call ft_lstadd_back                                                    */
 /*                                                                            */
-/*   Finally, advance the pointer in lst to the next node.                    */
 /*                                                                            */
-/*   At while end, retunrns the pointer to new list                           */
-/*                                                                            */
-/*   static int	previous_fd;
-                                                                         */
+/*   static int	previous_fd;                                                  */
 /*	if (previous_fd == fd)                                                    */
 /*		write(1, &"same\n", 6);                                               */
 /*	else                                                                      */
@@ -59,24 +63,30 @@
 /*                                                                            */
 char	*get_next_line(int fd)
 {
-	size_t		read_bytes;
-	char		*read_buf;
-	short		found_nl;
+	size_t			read_bytes;
+	char			*read_raw;
+	static char		*read_buf;
+	short			found_nl;
+	size_t			idx;
 
 	found_nl = 0;
 
 	while (!found_nl)
 	{
-		read_buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (read_buf == NULL)
-			return (NULL);
-		read_bytes = read(fd, read_buf, BUFFER_SIZE);
-	read_buf[read_bytes]= '\0';
+		{
+			read_buffer_size(fd, &read_raw, &read_bytes);
+			idx = 0;
+			while (read_raw[idx] != '\0' && read_raw[idx++] != '\n')
+				;	
+		if (idx == read_bytes)
+			read_buf = read_raw;
+		}
+		else
+		{
+		}
+
 	if (read_bytes == 0)
-	{
-		free(read_buf);
 		return (NULL);
-		write(1, &"File end\n", 10);
-	}
 	return (read_buf);
 }
