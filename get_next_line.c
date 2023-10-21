@@ -6,12 +6,12 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/20 17:06:22 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:23:17 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE
+# define BUFFER_SIZE
 #endif
 /* gnl_join() joins preffix(buf) with suffix(raw). Both null terminated       */
 /*                                                                            */
@@ -48,14 +48,14 @@ char	*gnl_join(char *buf, char *raw)
 	buf_size = 0;
 	if (buf)
 		while (buf[buf_size] != '\0')
-				buf_size++;
+			buf_size++;
 	raw_size = 0;
-		while (raw[raw_size] != '\0')
-				raw_size++;
+	while (raw[raw_size] != '\0')
+		raw_size++;
 	newbuf_size = buf_size + raw_size + 1;
 	newbuf = (char *)malloc(newbuf_size);
 	if (newbuf == NULL)
-		return(NULL);
+		return (NULL);
 	idx = 0;
 	while (idx < (buf_size))
 	{
@@ -64,7 +64,7 @@ char	*gnl_join(char *buf, char *raw)
 	}
 	while ((idx - buf_size) < raw_size)
 	{
-		newbuf[idx] = raw[idx -buf_size];
+		newbuf[idx] = raw[idx - buf_size];
 		idx++;
 	}
 	newbuf[idx] = '\0';
@@ -128,12 +128,7 @@ static char	*gnl_substr(char *str, unsigned int start, size_t len)
 /*                                                                            */
 static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 {
-	size_t	size;
-
-	size = BUFFER_SIZE + 1;
-
-	*read_raw = (char *)malloc(sizeof(char) * size);
-	//*read_raw = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	*read_raw = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (read_raw != NULL)
 	{
 		*read_bytes = read(fd, *read_raw, BUFFER_SIZE);
@@ -143,7 +138,7 @@ static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 			*read_raw = NULL;
 		}
 		else
-			read_raw[0][*read_bytes]= '\0';
+			read_raw[0][*read_bytes] = '\0';
 	}
 }
 
@@ -186,6 +181,7 @@ char	*read_to_buff(int fd, char	*read_buf)
 {
 	ssize_t		read_bytes;
 	char		*read_raw;
+
 	read_buffer_size(fd, &read_raw, &read_bytes);
 	if (read_bytes <= 0)
 		return (NULL);
@@ -200,18 +196,17 @@ short	buff_analisis(char	**read_buf, char	**line)
 	ssize_t		idx_ret;
 	short		found; 
 
-
 	found = 0;
 	idx = 0;
 	while (read_buf[0][idx] != '\0' && read_buf[0][idx] != '\n')
-		idx++;	
-	if (read_buf[0][idx] == '\n') //new_line exists
+		idx++;
+	if (read_buf[0][idx] == '\n')
 	{
 		idx_ret = idx + 1;
 		read_buf_part1 = gnl_substr(*read_buf, 0, idx_ret);
 		found = 1;
 		while (read_buf[0][idx] != '\0')
-			idx++;	
+			idx++;
 		read_buf_part2 = gnl_substr(*read_buf, idx_ret, (idx - (idx_ret)));
 		free(*read_buf);
 		*read_buf = read_buf_part2;
@@ -219,7 +214,7 @@ short	buff_analisis(char	**read_buf, char	**line)
 		found = 1;
 	}
 	else
-		*line = NULL;	
+		*line = NULL;
 	return (found);
 }
 
@@ -232,13 +227,13 @@ char	*get_next_line(int fd)
 	found = 0;
 	while (!found)
 	{
-		if (read_buf == NULL)  // No previous bytes saved
+		if (read_buf == NULL)
 		{
 			read_buf = read_to_buff(fd, read_buf);
 			if (read_buf)
 				found = buff_analisis(&read_buf, &line);
 		}
-		else // previous bytes saved
+		else
 		{
 			found = buff_analisis(&read_buf, &line);
 			if (!found)
