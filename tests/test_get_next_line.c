@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:16:41 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/21 12:17:38 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:25:34 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../get_next_line.h"
@@ -42,7 +42,8 @@ void	show_file(char *filename)
 int	main(void)
 {
 	printf(">%d<\n", BUFFER_SIZE);
-//	show_file("uno.txt");
+	show_file("uno.txt");
 	show_file("1char.txt");
+	show_file("dos.txt");
 	return (0);
 }

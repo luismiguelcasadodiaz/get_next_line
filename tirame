@@ -1,0 +1,451 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                Welcome to Francinette, a 42 tester framework!                ║
+╚═══════════════════════╦══════════════════════════════╦═══════════════════════╝
+                        ║         get_next_line        ║
+                        ╚══════════════════════════════╝
+⠋ Preparing framework⠙ Preparing framework⠹ Preparing framework✔ Preparing framework
+⠋ Executing: norminette⠙ Executing: norminette⠹ Executing: norminette⠸ Executing: norminette✖ Executing: norminette
+get_next_line_utils.c: OK!
+get_next_line.c: Error!
+Error: TOO_MANY_LINES       (line:  76, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 207, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 244, col:   1):	Too many functions in file
+Error: TOO_MANY_LINES       (line: 276, col:   1):	Function has more than 25 lines
+get_next_line.h: OK!
+tests/test_get_next_line.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  45, col:   1):	Comment is invalid in this scope
+bonus/get_next_line_utils_bonus.c: OK!
+bonus/get_next_line_bonus.h: OK!
+bonus/get_next_line_bonus.c: OK!
+
+ℹ Running tests: gnlTester (https://github.com/Tripouille/gnlTester)
+[34m[Mandatory]
+[37m[BUFFER_SIZE = 1]: [0m
+[37mInvalid fd: ==18035== Conditional jump or move depends on uninitialised value(s)
+==18035==    at 0x10A717: check(bool) (check.cpp:8)
+==18035==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18035==    by 0x10CB42: main (mandatory.cpp:29)
+==18035== 
+[32m1.OK ==18035== Conditional jump or move depends on uninitialised value(s)
+==18035==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18035==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18035==    by 0x10CB42: main (mandatory.cpp:29)
+==18035== 
+==18035== Conditional jump or move depends on uninitialised value(s)
+==18035==    at 0x10A717: check(bool) (check.cpp:8)
+==18035==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18035==    by 0x10CB50: main (mandatory.cpp:29)
+==18035== 
+[31m2.KO ==18035== Conditional jump or move depends on uninitialised value(s)
+==18035==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18035==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18035==    by 0x10CB50: main (mandatory.cpp:29)
+==18035== 
+==18035== Invalid free() / delete / delete[] / realloc()
+==18035==    at 0x484620F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18035==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18035==    by 0x10CB50: main (mandatory.cpp:29)
+==18035==  Address 0x4ad67d0 is in the BSS segment of /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.32
+==18035== 
+==18035== Conditional jump or move depends on uninitialised value(s)
+==18035==    at 0x10A717: check(bool) (check.cpp:8)
+==18035==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18035==    by 0x10CB64: main (mandatory.cpp:29)
+==18035== 
+[32m3.OK ==18035== Conditional jump or move depends on uninitialised value(s)
+==18035==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18035==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18035==    by 0x10CB64: main (mandatory.cpp:29)
+==18035== 
+[0m
+[37mfiles/empty: ==18036== Conditional jump or move depends on uninitialised value(s)
+==18036==    at 0x10A717: check(bool) (check.cpp:8)
+==18036==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18036==    by 0x10CE87: main (mandatory.cpp:35)
+==18036== 
+[32m1.OK ==18036== Conditional jump or move depends on uninitialised value(s)
+==18036==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18036==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18036==    by 0x10CE87: main (mandatory.cpp:35)
+==18036== 
+==18036== Conditional jump or move depends on uninitialised value(s)
+==18036==    at 0x10A717: check(bool) (check.cpp:8)
+==18036==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18036==    by 0x10CE93: main (mandatory.cpp:35)
+==18036== 
+[31m2.KO ==18036== Conditional jump or move depends on uninitialised value(s)
+==18036==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18036==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18036==    by 0x10CE93: main (mandatory.cpp:35)
+==18036== 
+==18036== Invalid free() / delete / delete[] / realloc()
+==18036==    at 0x484620F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18036==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18036==    by 0x10CE93: main (mandatory.cpp:35)
+==18036==  Address 0x4ad67d0 is in the BSS segment of /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.32
+==18036== 
+[0m
+[37mfiles/nl: [32m1.OK [32m2.OK [0m
+[37mfiles/41_no_nl: ==18038== Invalid read of size 1
+==18038==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18038==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18038==    by 0x10D429: main (mandatory.cpp:45)
+==18038==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18038== 
+[93m1.SIGSEGV
+[37mfiles/41_with_nl: [32m1.OK ==18039== Invalid read of size 1
+==18039==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18039==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18039==    by 0x10D709: main (mandatory.cpp:50)
+==18039==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18039== 
+[93m2.SIGSEGV
+[37mfiles/42_no_nl: ==18040== Invalid read of size 1
+==18040==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18040==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18040==    by 0x10D9DA: main (mandatory.cpp:56)
+==18040==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18040== 
+[93m1.SIGSEGV
+[37mfiles/42_with_nl: [32m1.OK ==18041== Invalid read of size 1
+==18041==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18041==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18041==    by 0x10DCBA: main (mandatory.cpp:61)
+==18041==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18041== 
+[93m2.SIGSEGV
+[37mfiles/43_no_nl: ==18042== Invalid read of size 1
+==18042==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18042==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18042==    by 0x10DF95: main (mandatory.cpp:72)
+==18042==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18042== 
+[93m1.SIGSEGV
+[37mfiles/43_with_nl: [32m1.OK ==18043== Invalid read of size 1
+==18043==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18043==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18043==    by 0x10E275: main (mandatory.cpp:77)
+==18043==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18043== 
+[93m2.SIGSEGV
+[37mfiles/multiple_nlx5: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
+[37mfiles/multiple_line_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK ==18045== Invalid read of size 1
+==18045==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18045==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18045==    by 0x10E88F: main (mandatory.cpp:92)
+==18045==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18045== 
+[93m5.SIGSEGV
+[37mfiles/multiple_line_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
+[37mfiles/alternate_line_nl_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK ==18047== Invalid read of size 1
+==18047==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18047==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18047==    by 0x10EEE5: main (mandatory.cpp:110)
+==18047==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18047== 
+[93m9.SIGSEGV
+[37mfiles/alternate_line_nl_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
+[37mfiles/big_line_no_nl: ==18049== Invalid read of size 1
+==18049==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18049==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18049==    by 0x10F4FF: main (mandatory.cpp:136)
+==18049==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18049== 
+[93m1.SIGSEGV
+[37mfiles/big_line_with_nl: [32m1.OK [32m2.OK [0m
+[37mstdin: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
+
+[37m[BUFFER_SIZE = 42]: [0m
+[37mInvalid fd: ==18071== Conditional jump or move depends on uninitialised value(s)
+==18071==    at 0x10A717: check(bool) (check.cpp:8)
+==18071==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18071==    by 0x10CB42: main (mandatory.cpp:29)
+==18071== 
+[32m1.OK ==18071== Conditional jump or move depends on uninitialised value(s)
+==18071==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18071==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18071==    by 0x10CB42: main (mandatory.cpp:29)
+==18071== 
+==18071== Conditional jump or move depends on uninitialised value(s)
+==18071==    at 0x10A717: check(bool) (check.cpp:8)
+==18071==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18071==    by 0x10CB50: main (mandatory.cpp:29)
+==18071== 
+[31m2.KO ==18071== Conditional jump or move depends on uninitialised value(s)
+==18071==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18071==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18071==    by 0x10CB50: main (mandatory.cpp:29)
+==18071== 
+==18071== Invalid free() / delete / delete[] / realloc()
+==18071==    at 0x484620F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18071==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18071==    by 0x10CB50: main (mandatory.cpp:29)
+==18071==  Address 0x4ad67d0 is in the BSS segment of /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.32
+==18071== 
+==18071== Conditional jump or move depends on uninitialised value(s)
+==18071==    at 0x10A717: check(bool) (check.cpp:8)
+==18071==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18071==    by 0x10CB64: main (mandatory.cpp:29)
+==18071== 
+[32m3.OK ==18071== Conditional jump or move depends on uninitialised value(s)
+==18071==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18071==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18071==    by 0x10CB64: main (mandatory.cpp:29)
+==18071== 
+[0m
+[37mfiles/empty: ==18072== Conditional jump or move depends on uninitialised value(s)
+==18072==    at 0x10A717: check(bool) (check.cpp:8)
+==18072==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18072==    by 0x10CE87: main (mandatory.cpp:35)
+==18072== 
+[32m1.OK ==18072== Conditional jump or move depends on uninitialised value(s)
+==18072==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18072==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18072==    by 0x10CE87: main (mandatory.cpp:35)
+==18072== 
+==18072== Conditional jump or move depends on uninitialised value(s)
+==18072==    at 0x10A717: check(bool) (check.cpp:8)
+==18072==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18072==    by 0x10CE93: main (mandatory.cpp:35)
+==18072== 
+[31m2.KO ==18072== Conditional jump or move depends on uninitialised value(s)
+==18072==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18072==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18072==    by 0x10CE93: main (mandatory.cpp:35)
+==18072== 
+==18072== Invalid free() / delete / delete[] / realloc()
+==18072==    at 0x484620F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18072==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18072==    by 0x10CE93: main (mandatory.cpp:35)
+==18072==  Address 0x4ad67d0 is in the BSS segment of /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.32
+==18072== 
+[0m
+[37mfiles/nl: [32m1.OK [32m2.OK [0m
+[37mfiles/41_no_nl: ==18074== Invalid read of size 1
+==18074==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18074==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18074==    by 0x10D429: main (mandatory.cpp:45)
+==18074==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18074== 
+[93m1.SIGSEGV
+[37mfiles/41_with_nl: [32m1.OK ==18075== Invalid read of size 1
+==18075==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18075==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18075==    by 0x10D709: main (mandatory.cpp:50)
+==18075==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18075== 
+[93m2.SIGSEGV
+[37mfiles/42_no_nl: ==18076== Invalid read of size 1
+==18076==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18076==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18076==    by 0x10D9DA: main (mandatory.cpp:56)
+==18076==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18076== 
+[93m1.SIGSEGV
+[37mfiles/42_with_nl: [32m1.OK [32m2.OK [32m3.OK [0m
+[37mfiles/43_no_nl: ==18078== Invalid read of size 1
+==18078==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18078==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18078==    by 0x10DFC8: main (mandatory.cpp:72)
+==18078==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18078== 
+[93m1.SIGSEGV
+[37mfiles/43_with_nl: [32m1.OK ==18079== Invalid read of size 1
+==18079==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18079==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18079==    by 0x10E2A8: main (mandatory.cpp:77)
+==18079==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18079== 
+[93m2.SIGSEGV
+[37mfiles/multiple_nlx5: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
+[37mfiles/multiple_line_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK ==18081== Invalid read of size 1
+==18081==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18081==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18081==    by 0x10E8C2: main (mandatory.cpp:92)
+==18081==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18081== 
+[93m5.SIGSEGV
+[37mfiles/multiple_line_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
+[37mfiles/alternate_line_nl_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK ==18084== Invalid read of size 1
+==18084==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18084==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18084==    by 0x10EF18: main (mandatory.cpp:110)
+==18084==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18084== 
+[93m9.SIGSEGV
+[37mfiles/alternate_line_nl_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
+[37mfiles/big_line_no_nl: ==18086== Invalid read of size 1
+==18086==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18086==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18086==    by 0x10F532: main (mandatory.cpp:136)
+==18086==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18086== 
+[93m1.SIGSEGV
+[37mfiles/big_line_with_nl: [32m1.OK [32m2.OK [0m
+[37mstdin: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
+
+[37m[BUFFER_SIZE = 10000000]: [0m
+[37mInvalid fd: ==18104== Conditional jump or move depends on uninitialised value(s)
+==18104==    at 0x10A717: check(bool) (check.cpp:8)
+==18104==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18104==    by 0x10CB42: main (mandatory.cpp:29)
+==18104== 
+[32m1.OK ==18104== Conditional jump or move depends on uninitialised value(s)
+==18104==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18104==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18104==    by 0x10CB42: main (mandatory.cpp:29)
+==18104== 
+==18104== Conditional jump or move depends on uninitialised value(s)
+==18104==    at 0x10A717: check(bool) (check.cpp:8)
+==18104==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18104==    by 0x10CB50: main (mandatory.cpp:29)
+==18104== 
+[31m2.KO ==18104== Conditional jump or move depends on uninitialised value(s)
+==18104==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18104==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18104==    by 0x10CB50: main (mandatory.cpp:29)
+==18104== 
+==18104== Invalid free() / delete / delete[] / realloc()
+==18104==    at 0x484620F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18104==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18104==    by 0x10CB50: main (mandatory.cpp:29)
+==18104==  Address 0x4ad67d0 is in the BSS segment of /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.32
+==18104== 
+==18104== Conditional jump or move depends on uninitialised value(s)
+==18104==    at 0x10A717: check(bool) (check.cpp:8)
+==18104==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18104==    by 0x10CB64: main (mandatory.cpp:29)
+==18104== 
+[32m3.OK ==18104== Conditional jump or move depends on uninitialised value(s)
+==18104==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18104==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18104==    by 0x10CB64: main (mandatory.cpp:29)
+==18104== 
+[0m
+[37mfiles/empty: ==18105== Conditional jump or move depends on uninitialised value(s)
+==18105==    at 0x10A717: check(bool) (check.cpp:8)
+==18105==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18105==    by 0x10CE87: main (mandatory.cpp:35)
+==18105== 
+[32m1.OK ==18105== Conditional jump or move depends on uninitialised value(s)
+==18105==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18105==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18105==    by 0x10CE87: main (mandatory.cpp:35)
+==18105== 
+==18105== Conditional jump or move depends on uninitialised value(s)
+==18105==    at 0x10A717: check(bool) (check.cpp:8)
+==18105==    by 0x10AD68: gnl(int, char const*) (gnl.cpp:22)
+==18105==    by 0x10CE93: main (mandatory.cpp:35)
+==18105== 
+[31m2.KO ==18105== Conditional jump or move depends on uninitialised value(s)
+==18105==    at 0x48461C5: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18105==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18105==    by 0x10CE93: main (mandatory.cpp:35)
+==18105== 
+==18105== Invalid free() / delete / delete[] / realloc()
+==18105==    at 0x484620F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18105==    by 0x10AD96: gnl(int, char const*) (gnl.cpp:25)
+==18105==    by 0x10CE93: main (mandatory.cpp:35)
+==18105==  Address 0x4ad67d0 is in the BSS segment of /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.32
+==18105== 
+[0m
+[37mfiles/nl: [32m1.OK [32m2.OK [0m
+[37mfiles/41_no_nl: ==18107== Invalid read of size 1
+==18107==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18107==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18107==    by 0x10D429: main (mandatory.cpp:45)
+==18107==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18107== 
+[93m1.SIGSEGV
+[37mfiles/41_with_nl: [32m1.OK ==18108== Invalid read of size 1
+==18108==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18108==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18108==    by 0x10D709: main (mandatory.cpp:50)
+==18108==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18108== 
+[93m2.SIGSEGV
+[37mfiles/42_no_nl: ==18109== Invalid read of size 1
+==18109==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18109==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18109==    by 0x10D9DA: main (mandatory.cpp:56)
+==18109==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18109== 
+[93m1.SIGSEGV
+[37mfiles/42_with_nl: [32m1.OK ==18110== Invalid read of size 1
+==18110==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18110==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18110==    by 0x10DCBA: main (mandatory.cpp:61)
+==18110==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18110== 
+[93m2.SIGSEGV
+[37mfiles/43_no_nl: ==18111== Invalid read of size 1
+==18111==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18111==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18111==    by 0x10DF95: main (mandatory.cpp:72)
+==18111==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18111== 
+[93m1.SIGSEGV
+[37mfiles/43_with_nl: [32m1.OK ==18112== Invalid read of size 1
+==18112==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18112==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18112==    by 0x10E275: main (mandatory.cpp:77)
+==18112==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18112== 
+[93m2.SIGSEGV
+[37mfiles/multiple_nlx5: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
+[37mfiles/multiple_line_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK ==18114== Invalid read of size 1
+==18114==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18114==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18114==    by 0x10E88F: main (mandatory.cpp:92)
+==18114==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18114== 
+[93m5.SIGSEGV
+[37mfiles/multiple_line_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
+[37mfiles/alternate_line_nl_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK ==18116== Invalid read of size 1
+==18116==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18116==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18116==    by 0x10EEE5: main (mandatory.cpp:110)
+==18116==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18116== 
+[93m9.SIGSEGV
+[37mfiles/alternate_line_nl_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
+[37mfiles/big_line_no_nl: ==18118== Invalid read of size 1
+==18118==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==18118==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
+==18118==    by 0x10F4FF: main (mandatory.cpp:136)
+==18118==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18118== 
+[93m1.SIGSEGV
+[37mfiles/big_line_with_nl: [32m1.OK [32m2.OK [0m
+[37mstdin: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
+
+
+To see the tests open: /home/luis/francinette/tests/get_next_line/gnlTester/tests/mandatory.cpp
+
+ℹ Running tests: fsoares (my own tests)
+[1;35mBUFFER_SIZE[0m: 1
+[0;34mInvalid fd          [0m: [0;31m1.KO [0mmunmap_chunk(): invalid pointer
+[0;33m2.KO Abort
+[0mSegmentation fault (core dumped)
+make: [Makefile:23: mandatory] Error 139 (no tiene efecto)
+[1;35mBUFFER_SIZE[0m: 10
+[0;34mInvalid fd          [0m: [0;31m1.KO [0mmunmap_chunk(): invalid pointer
+[0;33m2.KO Abort
+[0mSegmentation fault (core dumped)
+make: [Makefile:24: mandatory] Error 139 (no tiene efecto)
+[1;35mBUFFER_SIZE[0m: 1000000
+[0;34mInvalid fd          [0m: [0;31m1.KO [0mmunmap_chunk(): invalid pointer
+[0;33m2.KO Abort
+[0mSegmentation fault (core dumped)
+make: [Makefile:25: mandatory] Error 139 (no tiene efecto)
+⠋ Processing output⠙ Processing outputErrors found:
+
+To see the tests open: /home/luis/francinette/tests/get_next_line/fsoares/tester.c
+
+
+Summary: no bonus
+
+Norminette Errors: get_next_line.c, tests/test_get_next_line.c
+
+Failed tests: gnlTester, fsoares
+
