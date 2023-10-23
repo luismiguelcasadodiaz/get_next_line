@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/21 16:51:52 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:28:23 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -36,7 +36,7 @@ size_t	gnl_strlen(char	*s)
 /*  *raw  : the suffix  string.                                               */
 /*                                                                            */
 /* RETURNS                                                                    */
-/*  preffix + suffix + '\0` is the normal behaviour                           */
+/*  preffix + suffix + null-terminator is the normal behaviour                */
 /*  NULL     : When ENOMEM.                                                   */
 /*                                                                            */
 /* OPERATION                                                                  */
@@ -97,6 +97,8 @@ char	*gnl_substr(char *str, unsigned int start, size_t len)
 	char	*sub;
 	size_t	idx;
 
+	if (len == 0)
+		return (NULL);
 	sub = (char *)malloc(len + 1);
 	if (sub == NULL)
 		return (NULL);
