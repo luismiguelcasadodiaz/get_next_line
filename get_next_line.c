@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/21 18:17:58 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:14:11 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -46,7 +46,7 @@ static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 	}
 }
 
-/* read_to_buffe() joins existing buffer and read bytes from file descriptor  */
+/* read_to_buff()  joins existing buffer and read bytes from file descriptor  */
 /*                                                                            */
 /* GETS                                                                       */
 /*  fd : The file descriptor to read from                                     */
@@ -97,6 +97,8 @@ short	buff_analisis(char	**read_buf, char	**line)
 
 	*line = NULL;
 	found = 0;
+	if (*read_buf == NULL)
+		return (found);
 	idx = 0;
 	while (read_buf[0][idx] != '\0' && read_buf[0][idx] != '\n')
 		idx++;
@@ -132,7 +134,7 @@ void	buff_flush(char **read_buf, char **line)
 			*line[i] = read_buf[0][i];
 			i++;
 		}
-		*line[--i] = '\0';
+		*line[i] = '\0';
 	}
 	free(*read_buf);
 	*read_buf = NULL;
@@ -185,6 +187,17 @@ char	*get_next_line(int fd)
 	file_end = 0;
 	while (!found && !file_end)
 	{
+		found = buff_analisis(&read_buf, &line);
+		if (!found)
+		{
+			read_bytes = read_to_buff(fd, &read_buf);
+			if (read_bytes <= 0)
+			{
+				file_end = 1;
+				buff_flush(&read_buf, &line);
+			}
+		}
+/*
 		if (read_buf == NULL)
 		{
 			read_bytes = read_to_buff(fd, &read_buf);
@@ -211,6 +224,7 @@ char	*get_next_line(int fd)
 				}
 			}
 		}
+		*/
 	}
 	return (line);
 }
