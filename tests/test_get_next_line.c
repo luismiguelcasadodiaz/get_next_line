@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:16:41 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/23 13:46:27 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:51:54 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../get_next_line.h"
@@ -26,6 +26,7 @@ void	show_file(char *filename)
 		printf("Problems opening <%s> file \n", filename);
 		return ;
 	}
+	close(fd);
 	end_file = 0;
 	while (!end_file)
 	{

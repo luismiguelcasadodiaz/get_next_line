@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/23 18:18:54 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:46:24 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -168,7 +168,7 @@ void	buff_flush(char **read_buf, char **line)
 /*                                                                            */
 char	*get_next_line(int fd)
 {
-	static char	*read_buf[OPEN_MAX];
+	static char	*read_buf;
 	ssize_t		read_bytes;
 	char		*line;
 	short		found;
@@ -178,16 +178,16 @@ char	*get_next_line(int fd)
 	file_end = 0;
 	while (!found && !file_end)
 	{
-		found = buff_analisis(&read_buf[fd], &line);
+		found = buff_analisis(&read_buf, &line);
 		if (!found)
 		{
-			read_bytes = read_to_buff(fd, &read_buf[fd]);
+			read_bytes = read_to_buff(fd, &read_buf);
 			if (read_bytes <= 0)
 			{
 				file_end = 1;
-				buff_flush(&read_buf[fd], &line);
-				free(read_buf[fd]);
-				read_buf[fd] = NULL;
+				buff_flush(&read_buf, &line);
+				free(read_buf);
+				read_buf = NULL;
 			}
 		}
 	}
