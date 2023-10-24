@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/23 13:46:24 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:32:17 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -33,7 +33,9 @@
 static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 {
 	*read_raw = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (*read_raw != NULL)
+	if (*read_raw == NULL)
+		*read_bytes = -1;
+	else
 	{
 		*read_bytes = read(fd, *read_raw, BUFFER_SIZE);
 		if (*read_bytes <= 0)
@@ -44,7 +46,6 @@ static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 		else
 			read_raw[0][*read_bytes] = '\0';
 	}
-
 }
 
 /* read_to_buff()  joins existing buffer and read bytes from file descriptor  */
@@ -182,12 +183,20 @@ char	*get_next_line(int fd)
 		if (!found)
 		{
 			read_bytes = read_to_buff(fd, &read_buf);
-			if (read_bytes <= 0)
+			if (read_bytes == 0)
 			{
-				file_end = 1;
 				buff_flush(&read_buf, &line);
+				file_end = 1;
 				free(read_buf);
 				read_buf = NULL;
+			}
+			if (read_bytes == -1)
+			{
+				file_end = 1;
+				free(read_buf);
+				read_buf = NULL;
+				free(line);
+				line = NULL;
 			}
 		}
 	}

@@ -6,10 +6,10 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/23 18:18:54 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:18:27 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE
 #endif
@@ -44,7 +44,6 @@ static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 		else
 			read_raw[0][*read_bytes] = '\0';
 	}
-
 }
 
 /* read_to_buff()  joins existing buffer and read bytes from file descriptor  */

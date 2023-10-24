@@ -1,268 +1,0 @@
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                Welcome to Francinette, a 42 tester framework!                ║
-╚═══════════════════════╦══════════════════════════════╦═══════════════════════╝
-                        ║         get_next_line        ║
-                        ╚══════════════════════════════╝
-⠋ Preparing framework⠙ Preparing framework⠹ Preparing framework✔ Preparing framework
-⠋ Executing: norminette⠙ Executing: norminette⠹ Executing: norminette⠸ Executing: norminette✖ Executing: norminette
-get_next_line_utils.c: OK!
-get_next_line.c: Error!
-Error: TOO_MANY_LINES       (line:  76, col:   1):	Function has more than 25 lines
-Error: TOO_MANY_LINES       (line: 207, col:   1):	Function has more than 25 lines
-Error: TOO_MANY_FUNCS       (line: 244, col:   1):	Too many functions in file
-Error: TOO_MANY_LINES       (line: 282, col:   1):	Function has more than 25 lines
-get_next_line.h: OK!
-tests/test_get_next_line.c: Error!
-Error: WRONG_SCOPE_COMMENT  (line:  45, col:   1):	Comment is invalid in this scope
-bonus/get_next_line_utils_bonus.c: OK!
-bonus/get_next_line_bonus.h: OK!
-bonus/get_next_line_bonus.c: OK!
-
-ℹ Running tests: gnlTester (https://github.com/Tripouille/gnlTester)
-[34m[Mandatory]
-[37m[BUFFER_SIZE = 1]: [0m
-[37mInvalid fd: [32m1.OK [32m2.OK [32m3.OK [0m
-[37mfiles/empty: [32m1.OK [32m2.OK [0m
-[37mfiles/nl: [32m1.OK [32m2.OK [0m
-[37mfiles/41_no_nl: ==18676== Invalid read of size 1
-==18676==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18676==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18676==    by 0x10D429: main (mandatory.cpp:45)
-==18676==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18676== 
-[93m1.SIGSEGV
-[37mfiles/41_with_nl: [32m1.OK ==18677== Invalid read of size 1
-==18677==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18677==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18677==    by 0x10D709: main (mandatory.cpp:50)
-==18677==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18677== 
-[93m2.SIGSEGV
-[37mfiles/42_no_nl: ==18678== Invalid read of size 1
-==18678==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18678==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18678==    by 0x10D9DA: main (mandatory.cpp:56)
-==18678==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18678== 
-[93m1.SIGSEGV
-[37mfiles/42_with_nl: [32m1.OK ==18679== Invalid read of size 1
-==18679==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18679==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18679==    by 0x10DCBA: main (mandatory.cpp:61)
-==18679==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18679== 
-[93m2.SIGSEGV
-[37mfiles/43_no_nl: ==18680== Invalid read of size 1
-==18680==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18680==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18680==    by 0x10DF95: main (mandatory.cpp:72)
-==18680==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18680== 
-[93m1.SIGSEGV
-[37mfiles/43_with_nl: [32m1.OK ==18681== Invalid read of size 1
-==18681==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18681==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18681==    by 0x10E275: main (mandatory.cpp:77)
-==18681==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18681== 
-[93m2.SIGSEGV
-[37mfiles/multiple_nlx5: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
-[37mfiles/multiple_line_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK ==18683== Invalid read of size 1
-==18683==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18683==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18683==    by 0x10E88F: main (mandatory.cpp:92)
-==18683==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18683== 
-[93m5.SIGSEGV
-[37mfiles/multiple_line_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
-[37mfiles/alternate_line_nl_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK ==18685== Invalid read of size 1
-==18685==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18685==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18685==    by 0x10EEE5: main (mandatory.cpp:110)
-==18685==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18685== 
-[93m9.SIGSEGV
-[37mfiles/alternate_line_nl_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
-[37mfiles/big_line_no_nl: ==18687== Invalid read of size 1
-==18687==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18687==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18687==    by 0x10F4FF: main (mandatory.cpp:136)
-==18687==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18687== 
-[93m1.SIGSEGV
-[37mfiles/big_line_with_nl: [32m1.OK [32m2.OK [0m
-[37mstdin: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
-
-[37m[BUFFER_SIZE = 42]: [0m
-[37mInvalid fd: [32m1.OK [32m2.OK [32m3.OK [0m
-[37mfiles/empty: [32m1.OK [32m2.OK [0m
-[37mfiles/nl: [32m1.OK [32m2.OK [0m
-[37mfiles/41_no_nl: ==18710== Invalid read of size 1
-==18710==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18710==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18710==    by 0x10D429: main (mandatory.cpp:45)
-==18710==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18710== 
-[93m1.SIGSEGV
-[37mfiles/41_with_nl: [32m1.OK ==18711== Invalid read of size 1
-==18711==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18711==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18711==    by 0x10D709: main (mandatory.cpp:50)
-==18711==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18711== 
-[93m2.SIGSEGV
-[37mfiles/42_no_nl: ==18712== Invalid read of size 1
-==18712==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18712==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18712==    by 0x10D9DA: main (mandatory.cpp:56)
-==18712==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18712== 
-[93m1.SIGSEGV
-[37mfiles/42_with_nl: [32m1.OK [32m2.OK [32m3.OK [0m
-[37mfiles/43_no_nl: ==18714== Invalid read of size 1
-==18714==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18714==    by 0x10DFC8: main (mandatory.cpp:72)
-==18714==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18714== 
-[93m1.SIGSEGV
-[37mfiles/43_with_nl: [32m1.OK ==18715== Invalid read of size 1
-==18715==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18715==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18715==    by 0x10E2A8: main (mandatory.cpp:77)
-==18715==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18715== 
-[93m2.SIGSEGV
-[37mfiles/multiple_nlx5: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
-[37mfiles/multiple_line_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK ==18717== Invalid read of size 1
-==18717==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18717==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18717==    by 0x10E8C2: main (mandatory.cpp:92)
-==18717==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18717== 
-[93m5.SIGSEGV
-[37mfiles/multiple_line_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
-[37mfiles/alternate_line_nl_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK ==18719== Invalid read of size 1
-==18719==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18719==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18719==    by 0x10EF18: main (mandatory.cpp:110)
-==18719==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18719== 
-[93m9.SIGSEGV
-[37mfiles/alternate_line_nl_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
-[37mfiles/big_line_no_nl: ==18721== Invalid read of size 1
-==18721==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18721==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18721==    by 0x10F532: main (mandatory.cpp:136)
-==18721==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18721== 
-[93m1.SIGSEGV
-[37mfiles/big_line_with_nl: [32m1.OK [32m2.OK [0m
-[37mstdin: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
-
-[37m[BUFFER_SIZE = 10000000]: [0m
-[37mInvalid fd: [32m1.OK [32m2.OK [32m3.OK [0m
-[37mfiles/empty: [32m1.OK [32m2.OK [0m
-[37mfiles/nl: [32m1.OK [32m2.OK [0m
-[37mfiles/41_no_nl: ==18742== Invalid read of size 1
-==18742==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18742==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18742==    by 0x10D429: main (mandatory.cpp:45)
-==18742==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18742== 
-[93m1.SIGSEGV
-[37mfiles/41_with_nl: [32m1.OK ==18743== Invalid read of size 1
-==18743==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18743==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18743==    by 0x10D709: main (mandatory.cpp:50)
-==18743==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18743== 
-[93m2.SIGSEGV
-[37mfiles/42_no_nl: ==18744== Invalid read of size 1
-==18744==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18744==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18744==    by 0x10D9DA: main (mandatory.cpp:56)
-==18744==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18744== 
-[93m1.SIGSEGV
-[37mfiles/42_with_nl: [32m1.OK ==18745== Invalid read of size 1
-==18745==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18745==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18745==    by 0x10DCBA: main (mandatory.cpp:61)
-==18745==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18745== 
-[93m2.SIGSEGV
-[37mfiles/43_no_nl: ==18746== Invalid read of size 1
-==18746==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18746==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18746==    by 0x10DF95: main (mandatory.cpp:72)
-==18746==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18746== 
-[93m1.SIGSEGV
-[37mfiles/43_with_nl: [32m1.OK ==18747== Invalid read of size 1
-==18747==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18747==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18747==    by 0x10E275: main (mandatory.cpp:77)
-==18747==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18747== 
-[93m2.SIGSEGV
-[37mfiles/multiple_nlx5: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
-[37mfiles/multiple_line_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK ==18749== Invalid read of size 1
-==18749==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18749==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18749==    by 0x10E88F: main (mandatory.cpp:92)
-==18749==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18749== 
-[93m5.SIGSEGV
-[37mfiles/multiple_line_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [0m
-[37mfiles/alternate_line_nl_no_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK ==18751== Invalid read of size 1
-==18751==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18751==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18751==    by 0x10EEE5: main (mandatory.cpp:110)
-==18751==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18751== 
-[93m9.SIGSEGV
-[37mfiles/alternate_line_nl_with_nl: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
-[37mfiles/big_line_no_nl: ==18753== Invalid read of size 1
-==18753==    at 0x484ACA4: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18753==    by 0x10AD7A: gnl(int, char const*) (gnl.cpp:24)
-==18753==    by 0x10F4FF: main (mandatory.cpp:136)
-==18753==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==18753== 
-[93m1.SIGSEGV
-[37mfiles/big_line_with_nl: [32m1.OK [32m2.OK [0m
-[37mstdin: [32m1.OK [32m2.OK [32m3.OK [32m4.OK [32m5.OK [32m6.OK [32m7.OK [32m8.OK [32m9.OK [32m10.OK [0m
-
-
-To see the tests open: /home/luis/francinette/tests/get_next_line/gnlTester/tests/mandatory.cpp
-
-ℹ Running tests: fsoares (my own tests)
-[1;35mBUFFER_SIZE[0m: 1
-[0;34mInvalid fd          [0m: [0;32m1.OK [0m[0;32m2.OK [0m[0;32m3.OK [0m[0;32m4_LEAKS.OK [0m
-[0;34mempty.txt           [0m: [0;32m1.OK [0m[0;32m2.OK [0m[0;32m3_LEAKS.OK [0m
-[0;34m1char.txt           [0m: [0;31m1.KO [0m[0;32m2.OK [0m[0;31m3_LEAKS.KO [0m
-Segmentation fault (core dumped)
-make: [Makefile:23: mandatory] Error 139 (no tiene efecto)
-[1;35mBUFFER_SIZE[0m: 10
-[0;34mInvalid fd          [0m: [0;32m1.OK [0m[0;32m2.OK [0m[0;32m3.OK [0m[0;32m4_LEAKS.OK [0m
-[0;34mempty.txt           [0m: [0;32m1.OK [0m[0;32m2.OK [0m[0;32m3_LEAKS.OK [0m
-[0;34m1char.txt           [0m: [0;31m1.KO [0m[0;32m2.OK [0m[0;31m3_LEAKS.KO [0m
-Segmentation fault (core dumped)
-make: [Makefile:24: mandatory] Error 139 (no tiene efecto)
-[1;35mBUFFER_SIZE[0m: 1000000
-[0;34mInvalid fd          [0m: [0;32m1.OK [0m[0;32m2.OK [0m[0;32m3.OK [0m[0;32m4_LEAKS.OK [0m
-[0;34mempty.txt           [0m: [0;32m1.OK [0m[0;32m2.OK [0m[0;32m3_LEAKS.OK [0m
-[0;34m1char.txt           [0m: [0;31m1.KO [0m[0;32m2.OK [0m[0;31m3_LEAKS.KO [0m
-Segmentation fault (core dumped)
-make: [Makefile:25: mandatory] Error 139 (no tiene efecto)
-⠋ Processing output⠙ Processing outputErrors found:
-
-To see the tests open: /home/luis/francinette/tests/get_next_line/fsoares/tester.c
-
-
-Summary: no bonus
-
-Norminette Errors: get_next_line.c, tests/test_get_next_line.c
-
-Failed tests: fsoares, gnlTester
-
