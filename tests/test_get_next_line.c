@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:16:41 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/23 17:51:54 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/25 09:04:18 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../get_next_line.h"
@@ -26,7 +26,6 @@ void	show_file(char *filename)
 		printf("Problems opening <%s> file \n", filename);
 		return ;
 	}
-	close(fd);
 	end_file = 0;
 	while (!end_file)
 	{
@@ -50,6 +49,7 @@ int	main(void)
 	//show_file("giant_line_nl.txt");
 	//show_file("variable_nls.txt");
 	//show_file("giant_line.txt");
-	show_file("one_line_no_nl.txt");
+	show_file("multiple_nl.txt");
+	printf("--------\n");
 	return (0);
 }

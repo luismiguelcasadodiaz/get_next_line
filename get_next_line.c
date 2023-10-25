@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/24 13:32:17 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:01:50 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -124,7 +124,10 @@ void	buff_flush(char **read_buf, char **line)
 
 	if (*read_buf == NULL)
 	{
+		free(*line);
 		*line = NULL;
+		free(*read_buf);
+		*read_buf = NULL;
 		return ;
 	}
 	i = 0;
@@ -187,8 +190,6 @@ char	*get_next_line(int fd)
 			{
 				buff_flush(&read_buf, &line);
 				file_end = 1;
-				free(read_buf);
-				read_buf = NULL;
 			}
 			if (read_bytes == -1)
 			{
