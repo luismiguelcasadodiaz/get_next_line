@@ -6,13 +6,14 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/24 13:18:27 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:23:23 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE
 #endif
+
 /* gnl_read_buffer_size() returns thru parameters passed by reference the     */
 /* number of bytes read from a file descriptor and a null-terminated string   */
 /* holding read bytes                                                         */
@@ -167,12 +168,14 @@ void	buff_flush(char **read_buf, char **line)
 /*                                                                            */
 char	*get_next_line(int fd)
 {
-	static char	*read_buf[OPEN_MAX];
+	static char	*read_buf[FOPEN_MAX];
 	ssize_t		read_bytes;
 	char		*line;
 	short		found;
 	short		file_end;
 
+	if (fd < 0 || FOPEN_MAX < fd)
+		return (NULL);
 	found = 0;
 	file_end = 0;
 	while (!found && !file_end)
