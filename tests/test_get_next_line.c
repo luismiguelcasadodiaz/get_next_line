@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:16:41 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/25 09:04:18 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:21:30 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../get_next_line.h"
@@ -49,7 +49,7 @@ int	main(void)
 	//show_file("giant_line_nl.txt");
 	//show_file("variable_nls.txt");
 	//show_file("giant_line.txt");
-	show_file("multiple_nl.txt");
+	show_file("uno.txt");
 	printf("--------\n");
 	return (0);
 }
