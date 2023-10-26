@@ -1,5 +1,5 @@
  b main
- b get_next_line.c:197
- display i
- display read_buf[0]
+ display read_buf
+ display line
+ display read_bytes
  run
