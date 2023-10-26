@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/25 12:01:50 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:38:31 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -30,6 +30,8 @@
 /*    -1 o 0 when error.                                                      */
 /*    amount of bytes read: normal behaviour                                  */
 /*                                                                            */
+
+/*
 static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 {
 	*read_raw = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -47,6 +49,7 @@ static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 			read_raw[0][*read_bytes] = '\0';
 	}
 }
+*/
 
 /* read_to_buff()  joins existing buffer and read bytes from file descriptor  */
 /*                                                                            */
@@ -71,22 +74,32 @@ static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
 /*                                                                            */
 /*  The function returns read_bytes.                                          */
 /*                                                                            */
-ssize_t	read_to_buff(int fd, char	**read_buf)
+char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 {
-	ssize_t		read_bytes;
 	char		*read_raw;
-	char		*aux_buf;
+	char		*new_buf;
 
-	read_buffer_size(fd, &read_raw, &read_bytes);
-	if (read_bytes > 0)
+	read_raw = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (read_raw == NULL)
+		return (NULL);
+	*read_bytes = read(fd, read_raw, BUFFER_SIZE);
+	if (*read_bytes <= 0)
 	{
-		aux_buf = gnl_join(*read_buf, read_raw);
-		free(*read_buf);
-		*read_buf = aux_buf;
 		free(read_raw);
 		read_raw = NULL;
+		if (*read_bytes == -1)
+			return(NULL);
+		return (read_buf);
 	}
-	return (read_bytes);
+
+	read_raw[*read_bytes] = '\0';
+	new_buf = gnl_join(read_buf, read_raw);
+	free(read_raw);
+	read_raw = NULL;
+	if (new_buf == NULL)
+		return (NULL);
+	free(read_buf);
+	return (new_buf);
 }
 
 short	buff_analisis(char	**read_buf, char	**line)
@@ -185,13 +198,13 @@ char	*get_next_line(int fd)
 		found = buff_analisis(&read_buf, &line);
 		if (!found)
 		{
-			read_bytes = read_to_buff(fd, &read_buf);
-			if (read_bytes == 0)
+			read_buf = read_to_buff(fd, read_buf, &read_bytes);
+			if (read_buf && (read_bytes == 0))
 			{
 				buff_flush(&read_buf, &line);
 				file_end = 1;
 			}
-			if (read_bytes == -1)
+			if (!read_buf && (read_bytes == -1))
 			{
 				file_end = 1;
 				free(read_buf);
