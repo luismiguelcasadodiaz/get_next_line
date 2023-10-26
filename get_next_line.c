@@ -6,73 +6,57 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/26 20:38:31 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/27 01:29:21 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE
 #endif
-/* gnl_read_buffer_size() returns thru parameters passed by reference the     */
-/* number of bytes read from a file descriptor and a null-terminated string   */
-/* holding read bytes                                                         */
-/*                                                                            */
-/* GETS                                                                       */
-/*  fd    : The file descriptor to read from.                                 */
-/*  **read_raw : Holder to return a null-terminated string wiht read bytes    */
-/*  *read_bytes: Holder to return amount of bytes read.                       */
-/*                                                                            */
-/* RETURNS                                                                    */
-/*  inside **read_raw:                                                        */
-/*    null-terminated-string wiht read butes: normal behaviour                */
-/*    NULL     : When ENOMEM, end  of file, fd read error                     */
-/*  inside *read_bytes:                                                       */
-/*    -1 o 0 when error.                                                      */
-/*    amount of bytes read: normal behaviour                                  */
-/*                                                                            */
-
-/*
-static void	read_buffer_size(int fd, char **read_raw, ssize_t *read_bytes)
-{
-	*read_raw = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (*read_raw == NULL)
-		*read_bytes = -1;
-	else
-	{
-		*read_bytes = read(fd, *read_raw, BUFFER_SIZE);
-		if (*read_bytes <= 0)
-		{
-			free(*read_raw);
-			*read_raw = NULL;
-		}
-		else
-			read_raw[0][*read_bytes] = '\0';
-	}
-}
-*/
 
 /* read_to_buff()  joins existing buffer and read bytes from file descriptor  */
 /*                                                                            */
 /* GETS                                                                       */
 /*  fd : The file descriptor to read from                                     */
-/*  **read_buf : A passed by reference buffer to save read bytes in.          */
+/*  *read_buf : A buffer to concat in the read bytes from fd                  */
+/*  *read_bytes: a by reference integer to return file end condition          */
 /*                                                                            */
 /* RETURNS                                                                    */
-/*  The number of bytes read. A positive integer >0 normal behaviour.         */
-/*  Zero when end of file and no more bytes to read remain in fd.             */
-/*  negative when other problems wiht fd.                                     */
+/*  The new_buf resulting from the join of read_buf + read_raw                */
+/*                                                                            */
+/* RETURNS THRU ARGUMENTS                                                     */
+/*  The number of bytes read.                                                 */
+/*  - A positive integer >0 normal behaviour.                                 */
+/*  - Zero when end of file and no more bytes to read remain in fd.           */
+/*  - Negative when other problems with fd.                                   */
 /*                                                                            */
 /* OPERATION                                                                  */
 /*                                                                            */
 /* Automatic Variables                                                        */
-/*  read_bytes  keep numer of read bytes from file descriptor.                */
+/*  *new_buf keeps read_buf + read_raw and returns it.                        */
 /*  *read_raw to keep read bytes from file descriptor.                        */
 /*                                                                            */
-/*  Read_buffer_size returns fill in both automatic variables.                */
+/* Allocates memory to fill in with bytes read from file.                     */
 /*                                                                            */
-/*  Only when there are read bytes, read_raw buffer joins to read_buf.        */
+/* when reading from file fails cause end or file (read_bytes == 0)           */
+/*     deallocates memory used for reading                                    */
+/*     returns unchanged read_buf.                                            */
 /*                                                                            */
-/*  The function returns read_bytes.                                          */
+/* when reading from file fails cause other error (read_bytes == -1)          */
+/*     deallocates memory used for reading                                    */
+/*     returns NULL                                                           */
+/*                                                                            */
+/* when reading from file is OK                   (read_bytes > 0  )          */
+/*     null terminated read_raw                                               */
+/*     append it to read_buf                                                  */
+/*                                                                            */
+/*     deallocate read_raw                                                    */
+/*                                                                            */
+/*     when Join fails return NULL                                            */
+/*                                                                            */
+/*     Deallocate obsolete read_buf                                           */
+/*                                                                            */
+/*     Retunrs Join read_buf + read_raw                                       */
 /*                                                                            */
 char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 {
@@ -88,10 +72,9 @@ char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 		free(read_raw);
 		read_raw = NULL;
 		if (*read_bytes == -1)
-			return(NULL);
+			return (NULL);
 		return (read_buf);
 	}
-
 	read_raw[*read_bytes] = '\0';
 	new_buf = gnl_join(read_buf, read_raw);
 	free(read_raw);
@@ -102,63 +85,66 @@ char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 	return (new_buf);
 }
 
-short	buff_analisis(char	**read_buf, char	**line)
+/* buff_analisis() joins existing buffer and read bytes from file descriptor  */
+/*                                                                            */
+/* GETS                                                                       */
+/*  fd : The file descriptor to read from                                     */
+/*  *read_buf : A buffer to concat in the read bytes from fd                  */
+/*  *read_bytes: a by reference integer to return file end condition          */
+/*                                                                            */
+/* RETURNS                                                                    */
+/*  The new_buf resulting from the join of read_buf + read_raw                */
+char	*buff_analisis(char	**read_buf)
 {
-	char		*read_buf_part2;
-	ssize_t		idx;
-	ssize_t		idx_ret;
-	short		found;
+	char	*line;
+	char	*new_buf;
+	ssize_t	buf_len;
+	ssize_t	ret;
 
-	*line = NULL;
-	found = 0;
 	if (*read_buf == NULL)
-		return (found);
-	idx = 0;
-	while (read_buf[0][idx] != '\0' && read_buf[0][idx] != '\n')
-		idx++;
-	if (read_buf[0][idx] == '\n')
+		return (NULL);
+	buf_len = gnl_strlen_and_nl(&ret, read_buf[0]);
+	if (ret == -1)
+		return (NULL);
+	line = gnl_substr(*read_buf, 0, (ret + 1));
+	if (!line)
+		return (NULL);
+	new_buf = gnl_substr(*read_buf, (ret + 1), (buf_len - (ret + 1)));
+	if (!new_buf)
 	{
-		idx_ret = idx + 1;
-		*line = gnl_substr(*read_buf, 0, idx_ret);
-		found = 1;
-		while (read_buf[0][idx] != '\0')
-			idx++;
-		read_buf_part2 = gnl_substr(*read_buf, idx_ret, (idx - (idx_ret)));
-		free(*read_buf);
-		*read_buf = read_buf_part2;
-		found = 1;
+		free(line);
+		return (NULL);
 	}
-	return (found);
+	free(*read_buf);
+	*read_buf = new_buf;
+	return (line);
 }
 
-void	buff_flush(char **read_buf, char **line)
+char	*buff_flush(char **read_buf)
 {
+	char	*line;
 	size_t	i;
 
 	if (*read_buf == NULL)
 	{
-		free(*line);
-		*line = NULL;
 		free(*read_buf);
 		*read_buf = NULL;
-		return ;
+		return (NULL);
 	}
+	i = gnl_strlen(read_buf[0]);
+	line = (char *)malloc(i + 1);
+	if (!line)
+		return (NULL);
 	i = 0;
 	while (read_buf[0][i] != '\0')
-		i++;
-	*line = (char *)malloc(i + 1);
-	if (*line != NULL)
 	{
-		i = 0;
-		while (read_buf[0][i] != '\0')
-		{
-			line[0][i] = read_buf[0][i];
-			i++;
-		}
-		line[0][i] = '\0';
+		line[i] = read_buf[0][i];
+		i++;
 	}
+	line[i] = '\0';
 	free(*read_buf);
 	*read_buf = NULL;
+	return (line);
 }
 
 /* get_next_line() returns a line from a file descriptor.                     */
@@ -188,31 +174,23 @@ char	*get_next_line(int fd)
 	static char	*read_buf;
 	ssize_t		read_bytes;
 	char		*line;
-	short		found;
-	short		file_end;
 
-	found = 0;
-	file_end = 0;
-	while (!found && !file_end)
+	while (1)
 	{
-		found = buff_analisis(&read_buf, &line);
-		if (!found)
+		line = buff_analisis(&read_buf);
+		if (line)
+			return (line);
+		read_buf = read_to_buff(fd, read_buf, &read_bytes);
+		if (!read_buf && (read_bytes == -1))
 		{
-			read_buf = read_to_buff(fd, read_buf, &read_bytes);
-			if (read_buf && (read_bytes == 0))
-			{
-				buff_flush(&read_buf, &line);
-				file_end = 1;
-			}
-			if (!read_buf && (read_bytes == -1))
-			{
-				file_end = 1;
-				free(read_buf);
-				read_buf = NULL;
-				free(line);
-				line = NULL;
-			}
+			free(read_buf);
+			read_buf = NULL;
+			free(line);
+			return (NULL);
 		}
+		if (!read_buf && (read_bytes == 0))
+			return (NULL);
+		if (read_buf && (read_bytes == 0))
+			return (buff_flush(&read_buf));
 	}
-	return (line);
 }
