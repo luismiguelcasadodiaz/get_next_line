@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/27 01:29:21 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:33:00 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -58,6 +58,7 @@
 /*                                                                            */
 /*     Retunrs Join read_buf + read_raw                                       */
 /*                                                                            */
+
 char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 {
 	char		*read_raw;
@@ -65,14 +66,21 @@ char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 
 	read_raw = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (read_raw == NULL)
+	{
+		free(read_buf);
 		return (NULL);
+	}
 	*read_bytes = read(fd, read_raw, BUFFER_SIZE);
 	if (*read_bytes <= 0)
 	{
 		free(read_raw);
 		read_raw = NULL;
 		if (*read_bytes == -1)
+		{
+			free(read_buf);
+			read_buf = NULL;
 			return (NULL);
+		}
 		return (read_buf);
 	}
 	read_raw[*read_bytes] = '\0';
@@ -82,6 +90,7 @@ char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 	if (new_buf == NULL)
 		return (NULL);
 	free(read_buf);
+	read_buf = NULL;
 	return (new_buf);
 }
 
@@ -134,7 +143,11 @@ char	*buff_flush(char **read_buf)
 	i = gnl_strlen(read_buf[0]);
 	line = (char *)malloc(i + 1);
 	if (!line)
+	{
+		free(*read_buf);
+		*read_buf = NULL;
 		return (NULL);
+	}
 	i = 0;
 	while (read_buf[0][i] != '\0')
 	{
@@ -189,7 +202,11 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		if (!read_buf && (read_bytes == 0))
+		{
+			free(read_buf);
+			read_buf = NULL;
 			return (NULL);
+		}
 		if (read_buf && (read_bytes == 0))
 			return (buff_flush(&read_buf));
 	}
