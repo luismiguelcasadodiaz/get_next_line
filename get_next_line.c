@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/25 13:33:30 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:39:54 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -85,6 +85,8 @@ ssize_t	read_to_buff(int fd, char	**read_buf)
 		*read_buf = aux_buf;
 		free(read_raw);
 		read_raw = NULL;
+		if (aux_buf == NULL)
+			return (0);
 	}
 	return (read_bytes);
 }
@@ -107,11 +109,23 @@ short	buff_analisis(char	**read_buf, char	**line)
 	{
 		idx_ret = idx + 1;
 		*line = gnl_substr(*read_buf, 0, idx_ret);
-		found = 1;
+		if (!line)
+		{
+			free(*read_buf);
+			*read_buf = NULL;
+			return (1);
+		}
 		while (read_buf[0][idx] != '\0')
 			idx++;
 		read_buf_part2 = gnl_substr(*read_buf, idx_ret, (idx - (idx_ret)));
 		free(*read_buf);
+		*read_buf = NULL;
+		if (!read_buf_part2)
+		{
+			free(*line);
+			*line = NULL;
+			return (1);
+		}
 		*read_buf = read_buf_part2;
 		found = 1;
 	}
@@ -189,6 +203,8 @@ char	*get_next_line(int fd)
 			if (read_bytes == 0)
 			{
 				buff_flush(&read_buf, &line);
+				free(read_buf);
+				read_buf = NULL;
 				file_end = 1;
 			}
 			if (read_bytes == -1)
@@ -196,8 +212,8 @@ char	*get_next_line(int fd)
 				file_end = 1;
 				free(read_buf);
 				read_buf = NULL;
-				free(line);
-				line = NULL;
+				//free(line);
+				//line = NULL;
 			}
 		}
 	}
