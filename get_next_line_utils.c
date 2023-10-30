@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/28 15:32:55 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:48:50 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -83,11 +83,7 @@ char	*gnl_join(char *buf, char *raw)
 	raw_size = gnl_strlen(raw);
 	newbuf = (char *)malloc(buf_size + raw_size + 1);
 	if (newbuf == NULL)
-	{
-		free(buf);
-		buf = NULL;
-		return (NULL);
-	}
+		return (my_free(&buf));
 	idx = 0;
 	while (idx < (buf_size))
 	{
@@ -140,4 +136,11 @@ char	*gnl_substr(char *str, unsigned int start, size_t len)
 	}
 	sub[idx] = '\0';
 	return (sub);
+}
+
+char	*my_free(char **ptr)
+{
+	free(*ptr);
+	*ptr = NULL;
+	return (NULL);
 }
