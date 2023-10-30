@@ -6,10 +6,10 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/30 13:20:30 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/30 13:24:16 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE
 #endif
@@ -84,25 +84,15 @@ char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 	return (new_buf);
 }
 
-/* buff_analisis() splits buffer by first newline  in line and new_buf        */
+/* buff_analisis() joins existing buffer and read bytes from file descriptor  */
 /*                                                                            */
 /* GETS                                                                       */
-/*  **read_buf : A passed by reference buffer to split it by first newline    */
+/*  fd : The file descriptor to read from                                     */
+/*  *read_buf : A buffer to concat in the read bytes from fd                  */
+/*  *read_bytes: a by reference integer to return file end condition          */
 /*                                                                            */
 /* RETURNS                                                                    */
-/*  line : string containing read_buf initial chars till newline included     */
-/*                                                                            */
-/* RETURNS THRU by reference ARGUMENTS                                        */
-/*  **read_buf : buffer where initial chars and newline included were removed */
-/*                                                                            */
-/*  OPERATES                                                                  */
-/*                                                                            */
-/*                                                                            */
-/*                                                                            */
-/*                                                                            */
-/*                                                                            */
-/*                                                                            */
-/*                                                                            */
+/*  The new_buf resulting from the join of read_buf + read_raw                */
 char	*buff_analisis(char	**read_buf)
 {
 	char	*line;
@@ -172,24 +162,29 @@ char	*buff_flush(char **read_buf)
 /*                                                                            */
 char	*get_next_line(int fd)
 {
-	static char	*read_buf;
+	static char	*read_buf[OPEN_MAX];
 	ssize_t		read_bytes;
 	char		*line;
 
-	while (1)
+	if (0 <= fd && fd < OPEN_MAX)
 	{
-		line = buff_analisis(&read_buf);
-		if (line)
-			return (line);
-		read_buf = read_to_buff(fd, read_buf, &read_bytes);
-		if (!read_buf && (read_bytes == -1))
+		while (1)
 		{
-			free(line);
-			return (my_free(&read_buf));
+			line = buff_analisis(&read_buf[fd]);
+			if (line)
+				return (line);
+			read_buf[fd] = read_to_buff(fd, read_buf[fd], &read_bytes);
+			if (!read_buf[fd] && (read_bytes == -1))
+			{
+				free(line);
+				return (my_free(&read_buf[fd]));
+			}
+			if (!read_buf[fd] && (read_bytes == 0))
+				return (my_free(&read_buf[fd]));
+			if (read_buf[fd] && (read_bytes == 0))
+				return (buff_flush(&read_buf[fd]));
 		}
-		if (!read_buf && (read_bytes == 0))
-			return (my_free(&read_buf));
-		if (read_buf && (read_bytes == 0))
-			return (buff_flush(&read_buf));
 	}
+	else
+		return (NULL);
 }

@@ -6,13 +6,36 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/23 13:28:23 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:48:50 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE
 #endif
+
+size_t	gnl_strlen_and_nl(ssize_t *pos, char	*s)
+{
+	ssize_t	i;
+	short	found;
+
+	found = 0;
+	*pos = -1;
+	i = 0;
+	if (s)
+	{
+		while (s[i] != '\0')
+		{
+			if ((s[i] == '\n') && !found)
+			{
+				*pos = i;
+				found = 1;
+			}
+			i++;
+		}
+	}
+	return (i);
+}
 
 size_t	gnl_strlen(char	*s)
 {
@@ -60,7 +83,7 @@ char	*gnl_join(char *buf, char *raw)
 	raw_size = gnl_strlen(raw);
 	newbuf = (char *)malloc(buf_size + raw_size + 1);
 	if (newbuf == NULL)
-		return (NULL);
+		return (my_free(&buf));
 	idx = 0;
 	while (idx < (buf_size))
 	{
@@ -100,8 +123,11 @@ char	*gnl_substr(char *str, unsigned int start, size_t len)
 	if (len == 0)
 		return (NULL);
 	sub = (char *)malloc(len + 1);
-	if (sub == NULL)
+	if (!sub)
+	{
+		free(sub);
 		return (NULL);
+	}
 	idx = 0;
 	while (idx < len)
 	{
@@ -110,4 +136,11 @@ char	*gnl_substr(char *str, unsigned int start, size_t len)
 	}
 	sub[idx] = '\0';
 	return (sub);
+}
+
+char	*my_free(char **ptr)
+{
+	free(*ptr);
+	*ptr = NULL;
+	return (NULL);
 }

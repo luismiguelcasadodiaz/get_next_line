@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:16:41 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/27 01:30:30 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:23:35 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../get_next_line.h"
@@ -42,15 +42,6 @@ void	show_file(char *filename)
 int	main(void)
 {
 	printf(">%d<\n", BUFFER_SIZE);
-//	show_file("only_nl.txt");
-//	show_file("1char.txt");
-//	show_file("dos.txt");
-//	show_file("read_error.txt");
-//	show_file("giant_line_nl.txt");
-//	show_file("variable_nls.txt");
-//	show_file("giant_line.txt");
-//	show_file("multiple_nl.txt");
 	show_file("42_with_nl.txt");
-	printf("--------\n");
 	return (0);
 }
