@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/30 13:20:30 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/31 12:18:58 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -58,6 +58,11 @@
 /*                                                                            */
 /*     Retunrs Join read_buf + read_raw                                       */
 /*                                                                            */
+/* TAKE AWAYS                                                                 */
+/*                                                                            */
+/*   if something fails release strings passed by value like char *read_buf   */
+/*                                                                            */
+/*                                                                            */
 
 char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 {
@@ -97,11 +102,31 @@ char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 /*                                                                            */
 /*  OPERATES                                                                  */
 /*                                                                            */
+/*  When read_buf is empty ,nothing to analyze,  return null.                 */
 /*                                                                            */
+/*  Calculate read_buf lenght and find first new line.                        */
 /*                                                                            */
+/*  When no newline exist (ret == -1) returns NULL.                           */
 /*                                                                            */
+/*  Extract line to return from buffer init to newline position included.     */
 /*                                                                            */
+/*  When malloc fails returns NULL.                                           */
 /*                                                                            */
+/*  Extract remaining buffer to new_buf.                                      */
+/*                                                                            */
+/*  ATTENTION: gnl_substr returns NULL in two situations:                     */
+/*     Malloc fails.                                                          */
+/*     New line is at buffer end so new_buffer has to be empty                */
+/*     This is the reason for !new_buf && (buf_len - (ret + 1))               */
+/*                                        |--------v-----------|              */
+/*                                        if != 0 malloc fails                */
+/*                                        if == 0 empty new_buf               */
+/*                                                                            */
+/*  when malloc fails free previous extracted line and returns NULL.          */
+/*                                                                            */
+/*  Frees older buffer and assign to buffer new buffer.                       */
+/*                                                                            */
+/*  returns extractes line including a new line.                              */
 /*                                                                            */
 char	*buff_analisis(char	**read_buf)
 {
@@ -119,13 +144,43 @@ char	*buff_analisis(char	**read_buf)
 	if (!line)
 		return (NULL);
 	new_buf = gnl_substr(*read_buf, (ret + 1), (buf_len - (ret + 1)));
-	if (!new_buf)
+	if (!new_buf && (buf_len - (ret + 1)))
 		return (my_free(&line));
 	free(*read_buf);
 	*read_buf = new_buf;
 	return (line);
 }
 
+/* buff_flush() Empties the buffer                                            */
+/*                                                                            */
+/* GETS                                                                       */
+/*  **read_buf : A passed by reference buffer to empty it and return leftover */
+/*                                                                            */
+/* RETURNS                                                                    */
+/*  line : string containing read_buf letfovers                               */
+/*                                                                            */
+/* RETURNS THRU by reference ARGUMENTS                                        */
+/*  **read_buf : buffer settle to NULL after empty the buffe                  */
+/*                                                                            */
+/*  OPERATES                                                                  */
+/*                                                                            */
+/*  When read_buf is empty ,nothing to analyze,  return null.                 */
+/*                                                                            */
+/*  Calculate read_buf lenght.                                                */
+/*                                                                            */
+/*                                                                            */
+/*  allocate memory for a returning line wiht buffer content.                 */
+/*                                                                            */
+/*  When malloc fails returns NULL after releasing buffer.                    */
+/*                                                                            */
+/*  Copies buffer content into returning line.                                */
+/*                                                                            */
+/*  null terminate retunrning line.                                           */
+/*                                                                            */
+/*  Frees older buffer.                                                       */
+/*                                                                            */
+/*  returns extracted line.                                                   */
+/*                                                                            */
 char	*buff_flush(char **read_buf)
 {
 	char	*line;
@@ -160,15 +215,31 @@ char	*buff_flush(char **read_buf)
 /* OPERATION                                                                  */
 /*                                                                            */
 /* Automatic Variables                                                        */
-/*  read_raw to keep bytes as they come from file.                            */
-/*  read_buf to keep read bytes not yet delivered.                            */
+/*  STATIC read_buf to keep read bytes not yet delivered from call to call    */
+/*  read_bytes to keep amount of bytes read from file.                        */
+/* *line to partially return buffer as long a newline is found.               */
 /*                                                                            */
+/*  A infinite loop starts analysing the buffer trying to find a newline      */
+/*  inside.                                                                   */
 /*                                                                            */
+/*  if a newline is found retunrs the line.                                   */
+/*  if not reads from the file.                                               */
 /*                                                                            */
+/*  Reading file retursn 3 possible situation diferenciated thru read_bytes   */
 /*                                                                            */
+/*  when read_bytes == -1 an error reading file happened:                     */
+/*            release line                                                    */
+/*            release buffer                                                  */
+/*            returns NULL                                                    */
 /*                                                                            */
+/*  when read_bytes == 0, nothing else to read. wha have two cases:           */
 /*                                                                            */
-/*  If i have not bytes to deliver (read_buf == NULL) then i read more        */
+/*    buffer is empty:                                                        */
+/*    		 release buffer                                                   */
+/*    		 return NULL                                                      */
+/*                                                                            */
+/*    buffer with leftovers                                                   */
+/*           flush the buffer                                                 */
 /*                                                                            */
 char	*get_next_line(int fd)
 {

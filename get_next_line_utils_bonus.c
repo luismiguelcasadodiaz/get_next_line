@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/30 10:48:50 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/31 12:18:52 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -14,7 +14,32 @@
 # define BUFFER_SIZE
 #endif
 
-size_t	gnl_strlen_and_nl(ssize_t *pos, char	*s)
+/* gnl_strlen_and_nl() returns s'lenght and the pos of a newline char in s    */
+/*                                                                            */
+/* GETS                                                                       */
+/*  *read_buf : the buffer to find newline in and to return it length         */
+/*  *pos      : integer to return newline posiiton inside read_buf            */
+/*                                                                            */
+/* RETURNS                                                                    */
+/*   read_buf's length                                                        */
+/*                                                                            */
+/*   THRU passed by reference pos, the position of the newline,-1 otherwise   */
+/*                                                                            */
+/* OPERATES                                                                   */
+/*                                                                            */
+/*   set pos to -1  s it is no newline found                                  */
+/*                                                                            */
+/*                                                                            */
+/*   Loops buffer till the end.                                               */
+/*                                                                            */
+/*   Inside each loop, while not newline found, checks for a newline          */
+/*                                                                            */
+/*   when the new line was found, recor its posiiton in pos.                  */
+/*                                                                            */
+/*   returns read_buf's length                                                */
+/*                                                                            */
+/*                                                                            */
+size_t	gnl_strlen_and_nl(ssize_t *pos, char	*read_buf)
 {
 	ssize_t	i;
 	short	found;
@@ -22,11 +47,11 @@ size_t	gnl_strlen_and_nl(ssize_t *pos, char	*s)
 	found = 0;
 	*pos = -1;
 	i = 0;
-	if (s)
+	if (read_buf)
 	{
-		while (s[i] != '\0')
+		while (read_buf[i] != '\0')
 		{
-			if ((s[i] == '\n') && !found)
+			if ((read_buf[i] == '\n') && !found)
 			{
 				*pos = i;
 				found = 1;
@@ -37,6 +62,9 @@ size_t	gnl_strlen_and_nl(ssize_t *pos, char	*s)
 	return (i);
 }
 
+/*                                                                            */
+/* gnl_strlen() returns s'lenght                                              */
+/*                                                                            */
 size_t	gnl_strlen(char	*s)
 {
 	size_t	i;
@@ -107,37 +135,51 @@ char	*gnl_join(char *buf, char *raw)
 /*   B) do not request len character greater than the difference between      */
 /*      str's length minus start position.                                    */
 /* GETS                                                                       */
-/*  *str  : The string to extract from                                        */
+/*  *read_buf : The string to extract from.                                   */
 /*  start : Substring initial position.                                       */
-/*  len   : Size of string to return                                          */
+/*  len   : Size of string to return.                                         */
 /*                                                                            */
 /* RETURNS                                                                    */
 /*  Substring: correct behavior.                                              */
-/*  NULL     : When ENOMEM.                                                   */
+/*  NULL     : When ENOMEM or len = 0.                                        */
 /*                                                                            */
-char	*gnl_substr(char *str, unsigned int start, size_t len)
+/* OPERATES                                                                   */
+/*   When len = 0 returns NULL as there are no requires chars to extract.     */
+/*                                                                            */
+/*   Allocates memory for chars to extract and return in a null terminated    */
+/*   string.                                                                  */
+/*                                                                            */
+/*   Copies len chars from read_buf to line and null terminate it.            */
+/*                                                                            */
+/*   returns line.                                                            */
+/*                                                                            */
+char	*gnl_substr(char *read_buf, unsigned int start, size_t len)
 {
-	char	*sub;
+	char	*line;
 	size_t	idx;
 
 	if (len == 0)
 		return (NULL);
-	sub = (char *)malloc(len + 1);
-	if (!sub)
+	line = (char *)malloc(len + 1);
+	if (!line)
 	{
-		free(sub);
+		free(line);
 		return (NULL);
 	}
 	idx = 0;
 	while (idx < len)
 	{
-		sub[idx] = str[start + idx];
+		line[idx] = read_buf[start + idx];
 		idx++;
 	}
-	sub[idx] = '\0';
-	return (sub);
+	line[idx] = '\0';
+	return (line);
 }
 
+/* my_free() releases memory, sets pointer to null ans returns null.          */
+/*                                                                            */
+/* It is a helper function that saves me lines of code to pass norminette     */
+/*                                                                            */
 char	*my_free(char **ptr)
 {
 	free(*ptr);
