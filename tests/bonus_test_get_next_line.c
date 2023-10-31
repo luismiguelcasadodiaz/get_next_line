@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_get_next_line.c                               :+:      :+:    :+:   */
+/*   bonus_test_get_next_line.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luicasad <luicasad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:16:41 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/24 10:29:31 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/27 01:31:55 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../get_next_line.h"
@@ -36,7 +36,9 @@ void	show_file(char *filename1, char *filename2, char *filename3)
 	fd[0] = my_open(filename1);
 	fd[1] = my_open(filename2);
 	fd[2] = my_open(filename3);
-	end_fil[0] = end_fil[1] = end_fil[2] = 0;
+	end_fil[0] = 0;
+	end_fil[1] = 0;
+	end_fil[2] = 0;
 	while (!end_file[0] && !end_file[1] &&!end_file[2])
 	{
 		end_file[0] = ((line = get_next_line(fd[0])) == NULL);

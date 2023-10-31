@@ -6,7 +6,11 @@
 /*   By: luicasad <luicasad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:16:41 by luicasad          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/10/30 12:23:35 by luicasad         ###   ########.fr       */
+=======
 /*   Updated: 2023/10/26 17:21:30 by luicasad         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 #include "../get_next_line.h"
@@ -42,6 +46,9 @@ void	show_file(char *filename)
 int	main(void)
 {
 	printf(">%d<\n", BUFFER_SIZE);
+<<<<<<< HEAD
+	show_file("42_with_nl.txt");
+=======
 	//show_file("only_nl.txt");
 	//show_file("1char.txt");
 	//show_file("dos.txt");
@@ -51,5 +58,6 @@ int	main(void)
 	//show_file("giant_line.txt");
 	show_file("uno.txt");
 	printf("--------\n");
+>>>>>>> main
 	return (0);
 }
