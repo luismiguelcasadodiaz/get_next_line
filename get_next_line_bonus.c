@@ -6,10 +6,10 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/31 12:18:58 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/10/31 11:32:31 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE
 #endif
@@ -63,7 +63,6 @@
 /*   if something fails release strings passed by value like char *read_buf   */
 /*                                                                            */
 /*                                                                            */
-
 char	*read_to_buff(int fd, char	*read_buf, ssize_t *read_bytes)
 {
 	char		*read_raw;
@@ -144,7 +143,7 @@ char	*buff_analisis(char	**read_buf)
 	if (!line)
 		return (NULL);
 	new_buf = gnl_substr(*read_buf, (ret + 1), (buf_len - (ret + 1)));
-	if (!new_buf && (buf_len - (ret + 1)))
+	if (!new_buf && (buf_len != (ret + 1)))
 		return (my_free(&line));
 	free(*read_buf);
 	*read_buf = new_buf;
@@ -243,24 +242,29 @@ char	*buff_flush(char **read_buf)
 /*                                                                            */
 char	*get_next_line(int fd)
 {
-	static char	*read_buf;
+	static char	*read_buf[OPEN_MAX];
 	ssize_t		read_bytes;
 	char		*line;
 
-	while (1)
+	if (0 <= fd && fd < OPEN_MAX)
 	{
-		line = buff_analisis(&read_buf);
-		if (line)
-			return (line);
-		read_buf = read_to_buff(fd, read_buf, &read_bytes);
-		if (!read_buf && (read_bytes == -1))
+		while (1)
 		{
-			free(line);
-			return (my_free(&read_buf));
+			line = buff_analisis(&read_buf[fd]);
+			if (line)
+				return (line);
+			read_buf[fd] = read_to_buff(fd, read_buf[fd], &read_bytes);
+			if (!read_buf[fd] && (read_bytes == -1))
+			{
+				free(line);
+				return (my_free(&read_buf[fd]));
+			}
+			if (!read_buf[fd] && (read_bytes == 0))
+				return (my_free(&read_buf[fd]));
+			if (read_buf[fd] && (read_bytes == 0))
+				return (buff_flush(&read_buf[fd]));
 		}
-		if (!read_buf && (read_bytes == 0))
-			return (my_free(&read_buf));
-		if (read_buf && (read_bytes == 0))
-			return (buff_flush(&read_buf));
 	}
+	else
+		return (NULL);
 }
