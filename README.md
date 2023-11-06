@@ -82,3 +82,9 @@ curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh
 brew install --HEAD LouisBrunner/valgrind/valgrind
 
 valgrind ./a.out
+### End of chapter leet 1337 challenge
+
+/=∂/\/\[](_)§ /\/\@|V †|-|@ ̄| ̄ /-/!570®1<|-\£1_`/ ¢@/\/\ε vv!7}{ ???
+FAMOUS MAN THAT HISTORICALLY CAME WITH QQQ
+
+[Help in](https://www.dcode.fr/leet-speak-1337)
