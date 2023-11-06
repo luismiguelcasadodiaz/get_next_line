@@ -76,7 +76,9 @@ else
 endif
 ```
 
-### TO check memory leaks
+### To check memory leaks
 curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh
+
 brew install --HEAD LouisBrunner/valgrind/valgrind
+
 valgrind ./a.out
