@@ -6,13 +6,10 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/31 12:18:58 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/11/07 10:33:49 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE
-#endif
 
 /* read_to_buff()  joins existing buffer and read bytes from file descriptor  */
 /*                                                                            */
@@ -247,7 +244,7 @@ char	*get_next_line(int fd)
 	ssize_t		read_bytes;
 	char		*line;
 
-	while (1)
+	while ((0 <= fd && fd <= FOPEN_MAX) && (BUFFER_SIZE > 0))
 	{
 		line = buff_analisis(&read_buf);
 		if (line)
@@ -263,4 +260,5 @@ char	*get_next_line(int fd)
 		if (read_buf && (read_bytes == 0))
 			return (buff_flush(&read_buf));
 	}
+	return (NULL);
 }

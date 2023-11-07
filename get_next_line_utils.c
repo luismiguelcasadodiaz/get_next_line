@@ -6,13 +6,10 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/31 12:17:44 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:59:56 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE
-#endif
 
 /* gnl_strlen_and_nl() returns s'lenght and the pos of a newline char in s    */
 /*                                                                            */

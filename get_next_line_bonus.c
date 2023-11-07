@@ -6,13 +6,10 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:58:39 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/31 11:32:31 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/11/07 10:54:11 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE
-#endif
 
 /* read_to_buff()  joins existing buffer and read bytes from file descriptor  */
 /*                                                                            */
@@ -242,29 +239,25 @@ char	*buff_flush(char **read_buf)
 /*                                                                            */
 char	*get_next_line(int fd)
 {
-	static char	*read_buf[OPEN_MAX];
+	static char	*read_buf[FOPEN_MAX];
 	ssize_t		read_bytes;
 	char		*line;
 
-	if (0 <= fd && fd < OPEN_MAX)
+	while ((0 <= fd && fd <= FOPEN_MAX) && (BUFFER_SIZE > 0))
 	{
-		while (1)
+		line = buff_analisis(&read_buf[fd]);
+		if (line)
+			return (line);
+		read_buf[fd] = read_to_buff(fd, read_buf[fd], &read_bytes);
+		if (!read_buf[fd] && (read_bytes == -1))
 		{
-			line = buff_analisis(&read_buf[fd]);
-			if (line)
-				return (line);
-			read_buf[fd] = read_to_buff(fd, read_buf[fd], &read_bytes);
-			if (!read_buf[fd] && (read_bytes == -1))
-			{
-				free(line);
-				return (my_free(&read_buf[fd]));
-			}
-			if (!read_buf[fd] && (read_bytes == 0))
-				return (my_free(&read_buf[fd]));
-			if (read_buf[fd] && (read_bytes == 0))
-				return (buff_flush(&read_buf[fd]));
+			free(line);
+			return (my_free(&read_buf[fd]));
 		}
+		if (!read_buf[fd] && (read_bytes == 0))
+			return (my_free(&read_buf[fd]));
+		if (read_buf[fd] && (read_bytes == 0))
+			return (buff_flush(&read_buf[fd]));
 	}
-	else
-		return (NULL);
+	return (NULL);
 }

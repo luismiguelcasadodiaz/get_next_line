@@ -6,7 +6,7 @@
 /*   By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:17:32 by luicasad          #+#    #+#             */
-/*   Updated: 2023/10/31 13:18:03 by luicasad         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:43:49 by luicasad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	show_file(char *filename)
 int	main(void)
 {
 	printf(">%d<\n", BUFFER_SIZE);
-	show_file("42_with_nl.txt");
+	show_file("uno.txt");
 	printf("--------\n");
 	return (0);
 }
